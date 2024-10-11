@@ -6,24 +6,22 @@ from app import app  # Импортируем приложение из app.py
 class TestApp(unittest.TestCase):
 
     def setUp(self):
-        self.app = app.test_client()  # Используем тестовый клиент Flask
+        self.app = app.test_client()
         self.app.testing = True
 
     def test_even_func(self):
         response = self.app.get('/even/12')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'12 is <b>even</b>', response.data)  # Проверяем корректность ответа
+        self.assertIn(b'12 is <b>even</b>', response.data)
 
     def test_odd_func(self):
         response = self.app.get('/even/13')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'13 is odd', response.data)  # Проверяем корректность ответа
-
+        self.assertIn(b'13 is odd', response.data)
     def test_odd_func_negative(self):
         response = self.app.get('/even/14')
         self.assertEqual(response.status_code, 200)
-        self.assertNotIn(b'13 is odd', response.data)  # Проверяем корректность ответа
-
+        self.assertNotIn(b'13 is odd', response.data)
 
     def test_times_func(self):
         response = self.app.get('/time')
