@@ -19,6 +19,11 @@ class TestApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'13 is odd', response.data)  # Проверяем корректность ответа
 
+    def test_odd_func_negative(self):
+        response = self.app.get('/even/14')
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn(b'13 is odd', response.data)  # Проверяем корректность ответа
+
 
     def test_times_func(self):
         response = self.app.get('/time')
